@@ -1,17 +1,17 @@
-# Project Title
+# Maven-Tomcat-Mongo-intellij-Community-Edition
 
-One Paragraph of project description goes here
+This is a simple Jersey RESTful service project. I Put this together for IntelliJ community Edition.
+You can run Maven, tomcat, Jersey and mongo without having to pay for Intellij.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
+These instructions will get you a copy of the project up and running on your local machine only.
 ### Prerequisites
 
 What things you need to install the software and how to install them
 
 ```
-Download Tomcat7, Maven, Mongod
+Download Intellij community edition, Tomcat7, Maven, Mongod.
 ```
 
 ### Installing
@@ -26,9 +26,10 @@ Download or clone this project.
 Steps to follow on Intellij
 
 To configure Tomcat
+
 ```
 Click run
-Click Edit COnfigurations...
+Click Edit Configurations...
 Under Defaults select Maven
 ```
 
@@ -41,7 +42,6 @@ Command Line: tomcat7:run
 ```
 
 Create a New Maven Goal by clicking the plus (+) sign on the bottom.
-
 
 ```
 Select Run Maven Goal
@@ -96,7 +96,7 @@ if it worked you should get "Jersey say what the : bitcoin is kingt"
 
 ## Contributing
 
-Just Me and Youtube (not gonna lie)
+Youtube...
 
 ## Versioning
 
@@ -104,12 +104,12 @@ Just Me and Youtube (not gonna lie)
 
 ## Authors
 
-Me
+...
 
 ## License
 
-This project is Open Soursce
+This project is Open Source
 
 ## Acknowledgments
 
-Me
+...
