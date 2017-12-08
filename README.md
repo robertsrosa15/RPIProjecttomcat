@@ -8,7 +8,7 @@ You can run Maven, tomcat, Jersey and mongo without having to pay for Intellij.
 These instructions will get you a copy of the project up and running on your local machine only.
 ### Prerequisites
 
-What things you need to install the software and how to install them
+What things you need to install the software. No intructions on how to install them.
 
 ```
 Download Intellij community edition, Tomcat7, Maven, Mongod.
@@ -92,7 +92,10 @@ if it worked you should get "Jersey say what the : bitcoin is kingt"
 
 ## Built With
 
+* [IntelliJ Community Edition](https://www.jetbrains.com/idea/download/#section=windows) - IDE
 * [Maven](https://maven.apache.org/) - Dependency Management
+* [Tomcat7](https://tomcat.apache.org/download-70.cgi) - Server
+* [MongoDB](https://www.mongodb.com/download-center#community) - No SQL Database
 
 ## Contributing
 
