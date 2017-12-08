@@ -14,7 +14,7 @@ public class Hello {
     @GET
     public Response getGenMsg() {
 
-        String output = "Jersey say : " + "General shit";
+        String output = "Jersey say : " + "Bitcoin is the shit. You should invest NOW!!!";
 
         return Response.status(200).entity(output).build();
 

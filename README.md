@@ -11,77 +11,105 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to install the software and how to install them
 
 ```
-Give examples
+Download Tomcat7, Maven, Mongod
 ```
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
+Steps are simple
 
 ```
-Give the example
+Download or clone this project.
+```
+### Configurate the project
+
+Steps to follow on Intellij
+
+To configure Tomcat
+```
+Click run
+Click Edit COnfigurations...
+Under Defaults select Maven
 ```
 
-And repeat
+A new configuration for Maven needs to be created. Enter the following
 
 ```
-until finished
+Name: enter whatever
+Working directory: Enter the location of your project (you could click the browse button and find your project)
+Command Line: tomcat7:run
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+Create a New Maven Goal by clicking the plus (+) sign on the bottom.
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
 
 ```
-Give an example
+Select Run Maven Goal
+Enter "clean"
+Click OK
 ```
 
-### And coding style tests
+## Running the Project
 
-Explain what these tests test and why
+If everything is configured correctly you can run the project
 
 ```
-Give an example
+Click the Run button
 ```
 
-## Deployment
+### Run app on web browser
 
-Add additional notes about how to deploy this on a live system
+Simply open your web browser and run it
+
+```
+Open web brower and copy paste
+http://localhost:8888/
+```
+
+if it worked you should get "This is index holy crap it worked"
+
+### Test Jersey RESTful service
+
+Simply open your web browser and run it
+
+```
+Open web brower and copy paste
+http://localhost:8888/rest/hello
+```
+
+if it worked you should get "Jersey say : Bitcoin is the shit. You should invest NOW!!!"
+
+
+You can run the next jersey method for fun
+
+```
+Open web brower and copy paste
+http://localhost:8888/rest/hello/bitcoin is king
+```
+
+if it worked you should get "Jersey say what the : bitcoin is kingt"
+
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
 * [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Just Me and Youtube (not gonna lie)
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+...
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+Me
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is Open Soursce
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+Me
