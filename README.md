@@ -98,7 +98,7 @@ if it worked you should get "Jersey say what the : bitcoin is kingt"
 * [MongoDB](https://www.mongodb.com/download-center#community) - No SQL Database
 
 ## Contributing
-
++
 Youtube...
 
 ## Versioning
