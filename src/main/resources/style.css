@@ -1,0 +1,12 @@
+
+* {
+	margin:0;
+	padding:0;
+	list-style: none;
+}
+
+body {
+	color: #221F51;
+	font-size: 62.5%;
+	background: red;
+}
