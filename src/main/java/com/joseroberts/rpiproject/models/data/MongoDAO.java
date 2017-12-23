@@ -1,25 +1,29 @@
-//package com.joseroberts.rpiproject.models.data;
-//
-//import com.mongodb.DB;
-//import com.mongodb.MongoClient;
-//import com.mongodb.client.MongoDatabase;
-//
-//public class MongoDAO {
-//    private static DB db;
-//    private static MongoClient mongoClient = null;
-//
-//    public static void init(){
-////        MongoClient mongoClient = new MongoClient();
-////        MongoDatabase mongoDatabase = mongoClient.getDatabase("rpirepo");
-//
-//        mongoClient = new MongoClient("locahost", 27017);
-//        System.out.println("there was an error");
-//        db = (DB) mongoClient.getDatabase("rpirepo");
-//    }
-//    public static DB getDb(){
-//        return db;
-//    }
-//    public static void close(){
-//        mongoClient.close();
-//    }
-//}
+package com.joseroberts.rpiproject.models.data;
+
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+
+public class MongoDAO {
+    private final MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
+    private final MongoDatabase database = mongoClient.getDatabase("rpirepo");
+    private MongoCollection<Document> collection = database.getCollection("visitors");
+
+    public String getAll() {
+
+        StringBuilder output = new StringBuilder();
+
+        try (MongoCursor<Document> cur = collection.find().iterator()) {
+            while (cur.hasNext()) {
+                output.append(cur.next().toJson());
+            }
+        }
+
+        System.out.println(output);
+        mongoClient.close();
+
+        return output.toString();
+    }
+}
