@@ -1,5 +1,7 @@
 package com.joseroberts.rpiproject.models.data;
 
+import com.mongodb.BasicDBList;
+import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -25,5 +27,25 @@ public class MongoDAO {
         mongoClient.close();
 
         return output.toString();
+    }
+
+    public BasicDBList findAll() {
+        BasicDBList basicDBList = new BasicDBList();
+        BasicDBObject basicDBObject = new BasicDBObject();
+//        basicDBList.addAll((Collection<Document>) collection.find());
+/*
+        }*//*
+//        basicDBList.addAll((Collection<?>) collection.find().toString());
+        basicDBObject.putAll(collection.find().toString());*/
+
+        Document doc = new Document();
+        for (Document document: collection.find()) {
+            System.out.println(document);
+            basicDBList.add(document);
+        }
+        basicDBObject.putAll(basicDBList);
+
+        return basicDBList;
+
     }
 }

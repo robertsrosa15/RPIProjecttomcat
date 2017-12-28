@@ -3,6 +3,8 @@ package com.joseroberts.rpiproject;
 import com.joseroberts.rpiproject.config.MongoConfig;
 import com.joseroberts.rpiproject.models.Visitors;
 import com.joseroberts.rpiproject.models.data.MongoDAO;
+import com.mongodb.BasicDBList;
+import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -46,6 +48,16 @@ public class Hello {
 //        Document firstDocument = doc.first();
         System.out.println("**********************" + doc + "**********************");
         return Response.status(200).entity(doc.first().toJson()).build();
+    }
+
+
+    @GET
+    @Path("/visitorlist")
+    public Response getVisitorList(){
+        MongoDAO mongoDAO = new MongoDAO();
+        BasicDBList response = mongoDAO.findAll();
+        Document bson = new Document(response.toMap());
+        return Response.status(200).entity(response.toString()).build();
     }
 
     @GET
