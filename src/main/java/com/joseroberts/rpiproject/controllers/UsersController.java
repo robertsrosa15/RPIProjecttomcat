@@ -7,10 +7,8 @@ import com.mongodb.BasicDBList;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/user")
@@ -27,12 +25,20 @@ public class UsersController {
     }
 
     @POST
-    public String addUser(){
-        Users newUser = new Users("joey","myPass");
+    @Consumes({MediaType.MULTIPART_FORM_DATA,
+            MediaType.APPLICATION_JSON,
+            MediaType.TEXT_PLAIN,
+            MediaType.APPLICATION_FORM_URLENCODED})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addUser(@FormParam(value = "username") String username,
+                          @FormParam(value = "password") String password){
+        Users newUser = new Users(username,password);
+        System.out.println(newUser.toString());
         Gson gson = new Gson();
         Document request = Document.parse(gson.toJson(newUser));
         mongoDAO.saveDoc(collection, request);
-        return "user created";
+        String response = "response: user created";
+        return Response.status(200).entity(gson.toJson(response)).build();
     }
 
 
