@@ -1,52 +1,31 @@
 package com.joseroberts.rpiproject;
 
-import com.joseroberts.rpiproject.config.MongoConfig;
-import com.joseroberts.rpiproject.models.Visitors;
 import com.joseroberts.rpiproject.models.data.MongoDAO;
 import com.mongodb.BasicDBList;
-import com.mongodb.BasicDBObject;
-import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 
 //@Path("/hello")
 @Path("/try")
 public class Hello {
-
-    private Query query;
-
-    private ApplicationContext ctx = new AnnotationConfigApplicationContext(MongoConfig.class);
-    private MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
-
-    private MongoClient mongoClient = new MongoClient("localhost", 27017);
-    private MongoDatabase mongoDatabase = mongoClient.getDatabase("rpirepo");
+//    private Query query;
+//    private ApplicationContext ctx = new AnnotationConfigApplicationContext(MongoConfig.class);
+//    private MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
+//    private MongoClient mongoClient = new MongoClient("localhost", 27017);
+//    private MongoDatabase mongoDatabase = mongoClient.getDatabase("rpirepo");
+    private MongoDAO mongoDAO = new MongoDAO();
+    MongoCollection<Document> collection = mongoDAO.database.getCollection("visitors");
 
     @GET
     public Response getGenMsg() {
-
-        MongoCollection<Document> dbOutput = mongoDatabase.getCollection("visitors");
         Document bson = new Document("visitorName","Stevens");
-        FindIterable<Document> doc = dbOutput.find(bson);
-
-//        Col myDoc = dbOutput.find();
-//        Document firstDocument = doc.first();
-        System.out.println("**********************" + doc + "**********************");
+        FindIterable<Document> doc = collection.find(bson);
         return Response.status(200).entity(doc.first().toJson()).build();
     }
 
@@ -54,49 +33,59 @@ public class Hello {
     @GET
     @Path("/visitorlist")
     public Response getVisitorList(){
-        MongoDAO mongoDAO = new MongoDAO();
-        BasicDBList response = mongoDAO.findAll();
-        Document bson = new Document(response.toMap());
+        BasicDBList response = mongoDAO.findAll(collection);
         return Response.status(200).entity(response.toString()).build();
     }
 
     @GET
-    @Path("/mine")
-    public Response getEm(){ 
-        MongoDAO mongoDAO = new MongoDAO();
-        String response = mongoDAO.getAll();
-        
-        return Response.status(200).entity(response).build();
+    @Path("/visitor/{param}")
+    public Response getVisitor(@PathParam("param") String msg){
+        Document bson = new Document("visitorName","Stevens");
+        FindIterable<Document> response = collection.find(bson);
+        return Response.status(200).entity(response.first().toJson()).build();
+    }
+
+    @POST
+    @Path("/visitore/{param}")
+    public Response updateVisitor(){
+        Document bson = new Document("visitorName","Stevens");
+        FindIterable<Document> response = collection.find(bson);
+        //make an update
+        Document bson1 = new Document("visitorName","Keilynn");
+        collection.updateOne(bson, bson1);
+        return Response.status(200).entity("user updated").build();
+    }
+
+    @POST
+    @Path("/create")
+    public Response createVisitor(){
+        //make an update
+        Document bson = new Document("visitorName","Keilynn");
+        collection.insertOne(bson);
+        return Response.status(200).entity("User Created").build();
     }
 
     @GET
     @Path("/{param}")
     public Response getMsg(@PathParam("param") String msg) {
-        String output = "Jersey say  : " + msg;
+        String output = "You entered : " + msg;
 //        String dbOutput = getDatabase("rpirepo");
-        return Response.status(200).entity(output +"\n Database has tge shitttt \n").build();
+        return Response.status(200).entity(output +"\n it seems you took a wrong turn \n").build();
     }
 
     @GET
     @Path("/works")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getVisitors(){
-//        response = mongoOperation.findAll(Visitors.class);
-        query = new Query(Criteria.where("visitorName").is("Stevens"));
-        Visitors response = mongoOperation.findOne(query, Visitors.class);
-        return Response.status(200).entity(response +"" ).build();
+//        MongoCollection<Document> collection = mongoDatabase.getCollection("visitors");
+
+        MongoDAO mongoDAO = new MongoDAO();
+        BasicDBList response = mongoDAO.findAll(collection);
+
+        Document bson = new Document(response.toMap());
+        return Response.status(200).entity(response.toString()).build();
     }
 
-    @GET
-    @Path("/user")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getUser(){
-//        query = new Query(Criteria.where("username").is("Jose"));
-        List<Visitors> response = mongoOperation.findAll(Visitors.class, "visitors");
-//        JsonObject json = new JSONArray(response);
-        System.out.println(response.getClass().getName());
-        return Response.status(200).entity(response + "").build();
-    }
 
 //    ***************************************
 //    possible image handling

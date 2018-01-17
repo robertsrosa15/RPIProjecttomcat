@@ -1,12 +1,11 @@
 package com.joseroberts.rpiproject.models;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Document(collection = "users")
+//@Document(collection = "users")
 public class Users {
     @Id
     private String id;
@@ -14,6 +13,9 @@ public class Users {
     @NotNull
     @Size(min = 3)
     private String username;
+
+    @NotNull
+    private String name;
 
     @NotNull
     @Size(min = 2)

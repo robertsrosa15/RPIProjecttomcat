@@ -1,11 +1,10 @@
 package com.joseroberts.rpiproject.models;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 
-@Document(collection = "usersettings")
+//@Document(collection = "usersettings")
 public class UserSettings {
     @Id
     private int id;

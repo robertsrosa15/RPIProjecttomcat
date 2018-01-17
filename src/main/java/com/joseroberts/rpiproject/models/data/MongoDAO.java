@@ -1,7 +1,6 @@
 package com.joseroberts.rpiproject.models.data;
 
 import com.mongodb.BasicDBList;
-import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -9,11 +8,11 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
 public class MongoDAO {
-    private final MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
-    private final MongoDatabase database = mongoClient.getDatabase("rpirepo");
-    private MongoCollection<Document> collection = database.getCollection("visitors");
+    public final MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
+    public final MongoDatabase database = mongoClient.getDatabase("rpirepo");
+//    private MongoCollection<Document> collection = database.getCollection("visitors");
 
-    public String getAll() {
+    public String getAll(MongoCollection<Document> collection) {
 
         StringBuilder output = new StringBuilder();
 
@@ -29,23 +28,30 @@ public class MongoDAO {
         return output.toString();
     }
 
-    public BasicDBList findAll() {
+    public BasicDBList findAll(MongoCollection<Document> collection) {
         BasicDBList basicDBList = new BasicDBList();
-        BasicDBObject basicDBObject = new BasicDBObject();
+//        BasicDBObject basicDBObject = new BasicDBObject();
 //        basicDBList.addAll((Collection<Document>) collection.find());
-/*
-        }*//*
 //        basicDBList.addAll((Collection<?>) collection.find().toString());
-        basicDBObject.putAll(collection.find().toString());*/
-
-        Document doc = new Document();
+//        basicDBObject.putAll(collection.find().toString());*/
+//        Document doc = new Document();
         for (Document document: collection.find()) {
             System.out.println(document);
             basicDBList.add(document);
         }
-        basicDBObject.putAll(basicDBList);
+//        basicDBObject.putAll(basicDBList);
 
         return basicDBList;
 
+    }
+
+    public BasicDBList findByName (MongoCollection<Document> collection , Document bson){
+        BasicDBList basicDBList = new BasicDBList();
+        basicDBList.add(collection.find(bson));
+        return basicDBList;
+    }
+
+    public void saveDoc (MongoCollection<Document> collection, Document bson){
+        collection.insertOne(bson);
     }
 }

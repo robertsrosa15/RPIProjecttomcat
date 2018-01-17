@@ -1,11 +1,8 @@
 package com.joseroberts.rpiproject.models;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.NotNull;
-
-@Document(collection = "visitors")
+//@Document(collection = "visitors")
 public class Visitors {
     @Id
     private String id;
