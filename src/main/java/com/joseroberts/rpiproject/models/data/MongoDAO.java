@@ -54,4 +54,9 @@ public class MongoDAO {
     public void saveDoc (MongoCollection<Document> collection, Document bson){
         collection.insertOne(bson);
     }
+
+    public void removeDoc (MongoCollection<Document> collection, Document bson){
+//        Document bs = new Document("_id", new ObjectId("5a6000bf781f3f2db88989b5"));
+        collection.deleteOne(bson);
+    }
 }

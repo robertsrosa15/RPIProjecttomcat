@@ -6,6 +6,7 @@ import com.joseroberts.rpiproject.models.data.MongoDAO;
 import com.mongodb.BasicDBList;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -30,15 +31,31 @@ public class UsersController {
             MediaType.TEXT_PLAIN,
             MediaType.APPLICATION_FORM_URLENCODED})
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addUser(@FormParam(value = "username") String username,
-                          @FormParam(value = "password") String password){
+    public Response addUser(@FormParam("username") String username,
+                          @FormParam("password") String password){
         Users newUser = new Users(username,password);
-        System.out.println(newUser.toString());
         Gson gson = new Gson();
         Document request = Document.parse(gson.toJson(newUser));
         mongoDAO.saveDoc(collection, request);
-        String response = "response: user created";
+        String response = gson.toJson(newUser.toString());
         return Response.status(200).entity(gson.toJson(response)).build();
+    }
+
+    @POST
+    @Path("/id/{id}")
+    @Consumes({MediaType.TEXT_PLAIN,
+            MediaType.APPLICATION_FORM_URLENCODED,
+            MediaType.APPLICATION_JSON,
+            MediaType.MULTIPART_FORM_DATA})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response removeOne(@PathParam("id") String id){
+        System.out.println(id);
+        Gson gson = new Gson();
+        Document request = new Document("_id", new ObjectId(id));
+        mongoDAO.removeDoc(collection, request);
+        String response = gson.toJson(request);
+        System.out.println(response);
+        return Response.status(200).entity(response).build();
     }
 
 

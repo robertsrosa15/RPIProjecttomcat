@@ -1,0 +1,2 @@
+0:0:0:0:0:0:0:1 - - [17/Jan/2018:21:57:24 -0500] "POST /rest/user/id/5a5fffe4781f3f399854fd4e HTTP/1.1" 200 115 http-bio-8888-exec-2 480
+0:0:0:0:0:0:0:1 - - [17/Jan/2018:21:58:19 -0500] "POST /rest/user/id/5a600021781f3f2db88989b3 HTTP/1.1" 200 115 http-bio-8888-exec-3 15
