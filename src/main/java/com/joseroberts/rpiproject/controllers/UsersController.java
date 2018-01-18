@@ -21,7 +21,6 @@ public class UsersController {
     @GET
     public Response getUsers(){
         BasicDBList response = mongoDAO.findAll(collection);
-//        Document bson = new Document(response.toMap());
         return Response.status(200).entity(response.toString()).build();
     }
 
@@ -37,8 +36,7 @@ public class UsersController {
         Gson gson = new Gson();
         Document request = Document.parse(gson.toJson(newUser));
         mongoDAO.saveDoc(collection, request);
-        String response = gson.toJson(newUser.toString());
-        return Response.status(200).entity(gson.toJson(response)).build();
+        return Response.status(200).entity(gson.toJson(request)).build();
     }
 
     @POST
@@ -49,12 +47,10 @@ public class UsersController {
             MediaType.MULTIPART_FORM_DATA})
     @Produces(MediaType.APPLICATION_JSON)
     public Response removeOne(@PathParam("id") String id){
-        System.out.println(id);
         Gson gson = new Gson();
         Document request = new Document("_id", new ObjectId(id));
         mongoDAO.removeDoc(collection, request);
         String response = gson.toJson(request);
-        System.out.println(response);
         return Response.status(200).entity(response).build();
     }
 
